@@ -14,7 +14,7 @@
               'bg-yellow-700 text-yellow-100': event.rarity === 'rare'
             }"
           >
-            {{ event.rarity }}
+            {{ event.rarity === 'common' ? '普通' : event.rarity === 'uncommon' ? '罕见' : '稀有' }}
           </div>
         </div>
         <p class="text-purple-100 leading-relaxed">{{ event.description }}</p>
@@ -79,7 +79,7 @@
                border-2 border-purple-500"
         @click.stop
       >
-        <h2 class="text-xl font-bold text-purple-100 mb-4">Results</h2>
+        <h2 class="text-xl font-bold text-purple-100 mb-4">结果</h2>
         <div class="space-y-3">
           <div
             v-for="(result, index) in results"
@@ -99,7 +99,7 @@
           class="w-full mt-6 px-6 py-3 bg-purple-700 hover:bg-purple-600 text-purple-100
                  rounded-lg font-semibold transition-colors active:scale-95 touch-manipulation"
         >
-          Continue
+          继续
         </button>
       </div>
     </div>

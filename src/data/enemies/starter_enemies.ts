@@ -57,7 +57,7 @@ const defensiveAI: EnemyAI = (enemy) => {
 
 export const STARTER_ENEMIES: Enemy[] = [
   {
-    name: 'Cultist',
+    name: '邪教徒',
     currentHealth: 48,
     maxHealth: 48,
     block: 0,
@@ -70,7 +70,7 @@ export const STARTER_ENEMIES: Enemy[] = [
     ai: basicAI
   },
   {
-    name: 'Jaw Worm',
+    name: '颚虫',
     currentHealth: 42,
     maxHealth: 42,
     block: 0,
@@ -83,7 +83,7 @@ export const STARTER_ENEMIES: Enemy[] = [
     ai: aggressiveAI
   },
   {
-    name: 'Louse',
+    name: '虱子',
     currentHealth: 14,
     maxHealth: 14,
     block: 0,
@@ -96,7 +96,7 @@ export const STARTER_ENEMIES: Enemy[] = [
     ai: basicAI
   },
   {
-    name: 'Slaver',
+    name: '奴役者',
     currentHealth: 46,
     maxHealth: 46,
     block: 0,
@@ -109,7 +109,7 @@ export const STARTER_ENEMIES: Enemy[] = [
     ai: defensiveAI
   },
   {
-    name: 'Fungi Beast',
+    name: '真菌野兽',
     currentHealth: 52,
     maxHealth: 52,
     block: 0,

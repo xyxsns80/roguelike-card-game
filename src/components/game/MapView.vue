@@ -2,8 +2,8 @@
   <div class="map-view min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-4 overflow-y-auto">
     <!-- Header -->
     <div class="text-center mb-4">
-      <h1 class="text-2xl font-bold text-slate-100">Map</h1>
-      <p class="text-slate-400 text-sm">Floor {{ gameStore.floor }} of {{ mapData.floors.length }}</p>
+      <h1 class="text-2xl font-bold text-slate-100">地图</h1>
+      <p class="text-slate-400 text-sm">第 {{ gameStore.floor }} 层,共 {{ mapData.floors.length }} 层</p>
     </div>
 
     <!-- Map Container -->
@@ -111,27 +111,27 @@
 
     <!-- Node type legend -->
     <div class="mt-6 max-w-2xl mx-auto">
-      <h3 class="text-sm font-semibold text-slate-300 mb-2">Node Types</h3>
+      <h3 class="text-sm font-semibold text-slate-300 mb-2">节点类型</h3>
       <div class="grid grid-cols-3 gap-2 text-xs">
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">⚔️</span>
-          <span>Enemy</span>
+          <span>敌人</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">💀</span>
-          <span>Elite</span>
+          <span>精英</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">🏕️</span>
-          <span>Rest</span>
+          <span>休息</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">🛒</span>
-          <span>Shop</span>
+          <span>商店</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">❓</span>
-          <span>Event</span>
+          <span>事件</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300">
           <span class="text-lg">👹</span>
@@ -272,26 +272,26 @@ function getNodeIcon(type: string): string {
 
 function getNodeTypeName(type: string): string {
   const names: Record<string, string> = {
-    start: 'Start',
-    enemy: 'Enemy Encounter',
-    elite: 'Elite Enemy',
-    rest: 'Rest Site',
-    shop: 'Shop',
-    event: 'Mystery Event',
-    boss: 'Boss Fight'
+    start: '起点',
+    enemy: '敌人遭遇',
+    elite: '精英敌人',
+    rest: '休息点',
+    shop: '商店',
+    event: '神秘事件',
+    boss: 'Boss 战'
   }
-  return names[type] || 'Unknown'
+  return names[type] || '未知'
 }
 
 function getNodeDescription(type: string): string {
   const descriptions: Record<string, string> = {
-    start: 'Your journey begins',
-    enemy: 'Fight against enemies',
-    elite: 'Challenging elite foe',
-    rest: 'Rest and recover',
-    shop: 'Buy cards and items',
-    event: 'A mysterious event',
-    boss: 'Face the floor boss'
+    start: '你的旅程开始',
+    enemy: '与敌人战斗',
+    elite: '挑战精英敌人',
+    rest: '休息并恢复',
+    shop: '购买卡牌和物品',
+    event: '一个神秘事件',
+    boss: '面对层 Boss'
   }
   return descriptions[type] || ''
 }

@@ -2,8 +2,8 @@
   <div class="reward-view min-h-screen bg-gradient-to-b from-amber-900 to-amber-950 p-4 flex flex-col">
     <!-- Header -->
     <div class="text-center mb-6">
-      <h1 class="text-3xl font-bold text-amber-100 mb-2">Victory!</h1>
-      <p class="text-amber-200">Choose a card to add to your deck</p>
+      <h1 class="text-3xl font-bold text-amber-100 mb-2">胜利!</h1>
+      <p class="text-amber-200">选择一张卡牌加入你的牌组</p>
     </div>
 
     <!-- Card Rewards -->
@@ -31,7 +31,7 @@
 
         <!-- Card Type -->
         <div class="text-xs uppercase tracking-wide text-amber-300 mb-2">
-          {{ card.type }} • {{ card.rarity }}
+          {{ card.type === 'attack' ? '攻击' : card.type === 'skill' ? '技能' : '能力' }} • {{ card.rarity === 'common' ? '普通' : card.rarity === 'uncommon' ? '罕见' : '稀有' }}
         </div>
 
         <!-- Card Description -->
@@ -41,15 +41,15 @@
         <div class="mt-3 flex gap-4 text-xs text-amber-300">
           <div v-if="card.effects.some(e => e.type === 'damage')" class="flex items-center gap-1">
             <span>⚔️</span>
-            <span>Attack</span>
+            <span>攻击</span>
           </div>
           <div v-if="card.effects.some(e => e.type === 'block')" class="flex items-center gap-1">
             <span>🛡️</span>
-            <span>Defense</span>
+            <span>防御</span>
           </div>
           <div v-if="card.effects.some(e => e.type === 'heal')" class="flex items-center gap-1">
             <span>💚</span>
-            <span>Heal</span>
+            <span>治疗</span>
           </div>
         </div>
       </div>
@@ -62,13 +62,13 @@
         class="px-6 py-3 bg-amber-800 hover:bg-amber-700 text-amber-100 rounded-lg
                font-semibold transition-colors active:scale-95 touch-manipulation"
       >
-        Skip Reward
+        跳过奖励
       </button>
     </div>
 
     <!-- Stats -->
     <div class="mt-4 text-center text-amber-200 text-sm">
-      Floor {{ gameStore.floor }} • Deck: {{ gameStore.deck.length }} cards
+      第 {{ gameStore.floor }} 层 • 牌组: {{ gameStore.deck.length }} 张卡牌
     </div>
   </div>
 </template>

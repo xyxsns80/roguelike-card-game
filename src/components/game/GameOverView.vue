@@ -2,8 +2,8 @@
   <div class="game-over-view min-h-screen bg-gradient-to-b from-red-900 to-red-950 p-4 flex flex-col justify-center items-center">
     <!-- Game Over Title -->
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-red-100 mb-2">Defeat</h1>
-      <p class="text-red-200 text-lg">Your journey has ended...</p>
+      <h1 class="text-4xl font-bold text-red-100 mb-2">失败</h1>
+      <p class="text-red-200 text-lg">你的旅程结束了...</p>
     </div>
 
     <!-- Stats -->
@@ -11,26 +11,26 @@
       <div class="grid grid-cols-2 gap-4 text-center">
         <div>
           <div class="text-3xl font-bold text-red-100">{{ gameStore.floor }}</div>
-          <div class="text-sm text-red-300">Floors Cleared</div>
+          <div class="text-sm text-red-300">通过层数</div>
         </div>
         <div>
           <div class="text-3xl font-bold text-red-100">{{ gameStore.gold }}</div>
-          <div class="text-sm text-red-300">Gold Earned</div>
+          <div class="text-sm text-red-300">获得金币</div>
         </div>
         <div>
           <div class="text-3xl font-bold text-red-100">{{ gameStore.deck.length }}</div>
-          <div class="text-sm text-red-300">Deck Size</div>
+          <div class="text-sm text-red-300">牌组大小</div>
         </div>
         <div>
           <div class="text-3xl font-bold text-red-100">{{ gameStore.currentHealth }}/{{ gameStore.maxHealth }}</div>
-          <div class="text-sm text-red-300">Final HP</div>
+          <div class="text-sm text-red-300">最终生命值</div>
         </div>
       </div>
     </div>
 
     <!-- Your Deck -->
     <div class="bg-red-800/50 rounded-xl p-4 mb-8 max-w-md w-full border border-red-700">
-      <h2 class="text-xl font-bold text-red-100 mb-3">Your Deck</h2>
+      <h2 class="text-xl font-bold text-red-100 mb-3">你的牌组</h2>
       <div class="grid grid-cols-4 gap-2">
         <div
           v-for="card in gameStore.deck"
@@ -52,7 +52,7 @@
              font-bold text-lg transition-all active:scale-95 touch-manipulation
              shadow-lg hover:shadow-xl"
     >
-      Try Again
+      再试一次
     </button>
   </div>
 </template>

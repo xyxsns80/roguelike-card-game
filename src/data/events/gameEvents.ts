@@ -7,30 +7,30 @@ import type { GameEvent } from '@/types/event'
 export const GAME_EVENTS: GameEvent[] = [
   {
     id: 'the_shrine',
-    title: 'The Shrine',
-    description: 'You discover an ancient shrine glowing with mysterious energy. You can either pay respects, search for treasures, or leave it be.',
+    title: '神龛',
+    description: '你发现了一座闪烁着神秘能量的古老神龛。你可以致敬、寻找宝藏,或者离开。',
     rarity: 'common',
     choices: [
       {
         id: 'pray',
-        text: 'Pray (Heal 20 HP)',
+        text: '祈祷 (恢复 20 点生命值)',
         rewards: [
-          { type: 'health', value: 20, message: 'You feel blessed and recover 20 HP.' }
+          { type: 'health', value: 20, message: '你感到被祝福,恢复了 20 点生命值。' }
         ]
       },
       {
         id: 'search',
-        text: 'Search for treasure',
+        text: '寻找宝藏',
         rewards: [
-          { type: 'gold', value: 40, message: 'You find 40 gold hidden beneath the shrine.' },
-          { type: 'health', value: -10, message: 'But you trigger a trap and lose 10 HP!' }
+          { type: 'gold', value: 40, message: '你在神龛下发现了 40 金币。' },
+          { type: 'health', value: -10, message: '但你触发了陷阱,失去了 10 点生命值!' }
         ]
       },
       {
         id: 'leave',
-        text: 'Leave it alone',
+        text: '不打扰它',
         rewards: [
-          { type: 'none', message: 'You decide to leave the shrine undisturbed.' }
+          { type: 'none', message: '你决定不打扰这座神龛。' }
         ]
       }
     ]
@@ -38,33 +38,33 @@ export const GAME_EVENTS: GameEvent[] = [
 
   {
     id: 'wandering_swordmaster',
-    title: 'The Wandering Swordmaster',
-    description: 'An old swordmaster offers to teach you a technique, but demands payment.',
+    title: '流浪剑客',
+    description: '一位老剑客愿意教你技巧,但要求报酬。',
     rarity: 'uncommon',
     choices: [
       {
         id: 'pay_gold',
-        text: 'Pay 50 gold (Gain 30 Max HP)',
+        text: '支付 50 金币 (获得 30 点最大生命值)',
         requirements: { gold: 50 },
         rewards: [
-          { type: 'gold', value: -50, message: 'You pay 50 gold.' },
-          { type: 'max_health', value: 30, message: 'The master teaches you secret techniques. Gain 30 Max HP!' }
+          { type: 'gold', value: -50, message: '你支付了 50 金币。' },
+          { type: 'max_health', value: 30, message: '大师传授你秘技。获得 30 点最大生命值!' }
         ]
       },
       {
         id: 'pay_health',
-        text: 'Spar with him (Lose 15 HP, Gain 20 Max HP)',
+        text: '与他切磋 (失去 15 点生命值,获得 20 点最大生命值)',
         requirements: { health: 15 },
         rewards: [
-          { type: 'health', value: -15, message: 'You take a beating during the spar.' },
-          { type: 'max_health', value: 20, message: 'But you learn from the experience. Gain 20 Max HP!' }
+          { type: 'health', value: -15, message: '你在切磋中受伤。' },
+          { type: 'max_health', value: 20, message: '但你从中学到了经验。获得 20 点最大生命值!' }
         ]
       },
       {
         id: 'decline',
-        text: 'Politely decline',
+        text: '礼貌拒绝',
         rewards: [
-          { type: 'none', message: 'The master nods respectfully and walks away.' }
+          { type: 'none', message: '大师尊敬地点点头,然后离开了。' }
         ]
       }
     ]
@@ -72,27 +72,27 @@ export const GAME_EVENTS: GameEvent[] = [
 
   {
     id: 'mysterious_merchant',
-    title: 'The Mysterious Merchant',
-    description: 'A hooded figure offers you a mysterious deal.',
+    title: '神秘商人',
+    description: '一个兜帽人向你提出一个神秘的交易。',
     rarity: 'rare',
     choices: [
       {
         id: 'gamble_gold',
-        text: 'Gamble 30 gold (50% chance for 80 gold)',
+        text: '用 30 金币赌博 (50% 几率获得 80 金币)',
         requirements: { gold: 30 },
         rewards: [] // Will be handled dynamically
       },
       {
         id: 'gamble_health',
-        text: 'Risk it all (50% chance for +25 Max HP, 50% chance for -20 HP)',
+        text: '孤注一掷 (50% 几率获得 25 点最大生命值,50% 几率失去 20 点生命值)',
         requirements: { health: 20 },
         rewards: [] // Will be handled dynamically
       },
       {
         id: 'ignore',
-        text: 'Ignore the merchant',
+        text: '无视商人',
         rewards: [
-          { type: 'none', message: 'You decide not to trust the mysterious figure.' }
+          { type: 'none', message: '你决定不信任这个神秘人。' }
         ]
       }
     ]
@@ -100,29 +100,29 @@ export const GAME_EVENTS: GameEvent[] = [
 
   {
     id: 'the_fountain',
-    title: 'The Mystic Fountain',
-    description: 'A beautiful fountain sparkles before you. The water seems to have magical properties.',
+    title: '神秘喷泉',
+    description: '一座美丽的喷泉在你面前闪烁。水似乎具有魔法属性。',
     rarity: 'common',
     choices: [
       {
         id: 'drink',
-        text: 'Drink from it',
+        text: '饮用',
         rewards: [
-          { type: 'health', value: 25, message: 'The water is refreshing. You heal 25 HP.' }
+          { type: 'health', value: 25, message: '水很清爽。你恢复了 25 点生命值。' }
         ]
       },
       {
         id: 'wash_face',
-        text: 'Wash your face',
+        text: '洗脸',
         rewards: [
-          { type: 'gold', value: 20, message: 'You feel refreshed and find 20 gold in your pocket.' }
+          { type: 'gold', value: 20, message: '你感到清爽,并在口袋里发现了 20 金币。' }
         ]
       },
       {
         id: 'leave',
-        text: 'Leave it alone',
+        text: '不打扰它',
         rewards: [
-          { type: 'none', message: 'You decide not to disturb the fountain.' }
+          { type: 'none', message: '你决定不打扰这座喷泉。' }
         ]
       }
     ]
@@ -130,30 +130,30 @@ export const GAME_EVENTS: GameEvent[] = [
 
   {
     id: 'big_chest',
-    title: 'The Big Chest',
-    description: 'You find a massive chest! However, it seems to be trapped.',
+    title: '大宝箱',
+    description: '你发现了一个巨大的宝箱!但是,它似乎有陷阱。',
     rarity: 'uncommon',
     choices: [
       {
         id: 'open_carefully',
-        text: 'Open carefully',
+        text: '小心打开',
         rewards: [
-          { type: 'gold', value: 60, message: 'You carefully disarm the traps and find 60 gold!' }
+          { type: 'gold', value: 60, message: '你小心地解除陷阱,发现了 60 金币!' }
         ]
       },
       {
         id: 'smash_open',
-        text: 'Smash it open',
+        text: '砸开',
         rewards: [
-          { type: 'gold', value: 100, message: 'You find 100 gold!' },
-          { type: 'health', value: -15, message: 'But you trigger a trap and lose 15 HP!' }
+          { type: 'gold', value: 100, message: '你发现了 100 金币!' },
+          { type: 'health', value: -15, message: '但你触发了陷阱,失去了 15 点生命值!' }
         ]
       },
       {
         id: 'ignore',
-        text: 'Leave it',
+        text: '离开它',
         rewards: [
-          { type: 'none', message: 'Better safe than sorry. You leave the chest.' }
+          { type: 'none', message: '安全第一。你离开了宝箱。' }
         ]
       }
     ]
@@ -161,30 +161,30 @@ export const GAME_EVENTS: GameEvent[] = [
 
   {
     id: 'the_fallen_hero',
-    title: 'The Fallen Hero',
-    description: 'You come across the remains of a fallen adventurer. Their gear is scattered about.',
+    title: '陨落的英雄',
+    description: '你遇到了一位陨落冒险者的遗骸。他们的装备散落一地。',
     rarity: 'common',
     choices: [
       {
         id: 'loot',
-        text: 'Loot the body',
+        text: '搜刮尸体',
         rewards: [
-          { type: 'gold', value: 35, message: 'You find 35 gold on the body.' }
+          { type: 'gold', value: 35, message: '你在尸体上发现了 35 金币。' }
         ]
       },
       {
         id: 'bury',
-        text: 'Give them a proper burial',
+        text: '妥善安葬',
         rewards: [
-          { type: 'health', value: 15, message: 'You feel a sense of peace and recover 15 HP.' },
-          { type: 'gold', value: 15, message: 'You also find 15 gold to cover burial costs.' }
+          { type: 'health', value: 15, message: '你感到平静,恢复了 15 点生命值。' },
+          { type: 'gold', value: 15, message: '你还发现了 15 金币用于安葬费用。' }
         ]
       },
       {
         id: 'leave',
-        text: 'Leave in peace',
+        text: '默默离开',
         rewards: [
-          { type: 'none', message: 'You pay your respects and continue on.' }
+          { type: 'none', message: '你表示敬意,然后继续前行。' }
         ]
       }
     ]

@@ -43,7 +43,7 @@
       </div>
 
       <div class="turn-info text-slate-400 text-sm">
-        Turn: {{ turn }}
+        回合: {{ turn }}
       </div>
     </div>
 
@@ -70,7 +70,7 @@
 
           <div class="enemy-health mb-2">
             <div class="flex justify-between text-xs text-slate-400 mb-1">
-              <span>HP</span>
+              <span>生命值</span>
               <span>{{ enemy.currentHealth }}/{{ enemy.maxHealth }}</span>
             </div>
             <div class="w-full bg-slate-900 rounded-full h-3">
@@ -86,12 +86,12 @@
           </div>
 
           <div class="enemy-intent text-center text-xs text-slate-400">
-            <div>Intent:</div>
+            <div>意图:</div>
             <div class="font-bold" :class="{
               'text-red-400': enemy.intent.type === 'attack',
               'text-blue-400': enemy.intent.type === 'defend'
             }">
-              {{ enemy.intent.type }} ({{ enemy.intent.value }})
+              {{ enemy.intent.type === 'attack' ? '攻击' : '防御' }} ({{ enemy.intent.value }})
             </div>
           </div>
         </div>
@@ -99,8 +99,8 @@
 
       <!-- Targeting mode indicator -->
       <div v-if="isTargetingMode" class="targeting-indicator bg-yellow-500/20 border-2 border-yellow-500 rounded-lg p-3 text-center animate-pulse">
-        <div class="text-yellow-400 font-bold">Select a target!</div>
-        <div class="text-xs text-yellow-300">Using: {{ selectedCard?.name }}</div>
+        <div class="text-yellow-400 font-bold">选择一个目标!</div>
+        <div class="text-xs text-yellow-300">使用: {{ selectedCard?.name }}</div>
       </div>
 
       <!-- Combat Log -->
@@ -127,7 +127,7 @@
           @click="cancelTargeting"
           class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
         >
-          ✕ Cancel
+          ✕ 取消
         </button>
       </div>
       <div class="hand-cards flex justify-center gap-3 overflow-x-auto pb-2 px-2">
@@ -171,11 +171,11 @@
       <div class="piles-info flex justify-center gap-6 mt-3 text-xs text-slate-400">
         <div class="flex items-center gap-2">
           <span class="text-lg">📚</span>
-          <span>Draw: {{ deck.drawPile.length }}</span>
+          <span>抽牌堆: {{ deck.drawPile.length }}</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-lg">🗑️</span>
-          <span>Discard: {{ deck.discardPile.length }}</span>
+          <span>弃牌堆: {{ deck.discardPile.length }}</span>
         </div>
       </div>
     </div>
@@ -187,7 +187,7 @@
         :disabled="!isPlayerTurn"
         class="end-turn-btn bg-red-600 hover:bg-red-700 disabled:bg-slate-700 text-white font-bold py-3 px-8 rounded-lg min-w-[120px] min-h-[48px] transition-colors"
       >
-        End Turn
+        结束回合
       </button>
     </div>
 
@@ -195,13 +195,13 @@
     <div v-if="isCombatOver" class="game-over-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50">
       <div class="game-over-content bg-slate-800 rounded-lg p-8 text-center">
         <h2 class="text-3xl font-bold mb-4" :class="playerWon ? 'text-green-400' : 'text-red-400'">
-          {{ playerWon ? 'Victory!' : 'Defeat' }}
+          {{ playerWon ? '胜利!' : '失败' }}
         </h2>
         <button
           @click="restartCombat"
           class="restart-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg min-w-[120px] min-h-[48px] transition-colors"
         >
-          Play Again
+          再玩一次
         </button>
       </div>
     </div>

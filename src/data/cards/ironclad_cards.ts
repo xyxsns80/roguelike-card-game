@@ -9,8 +9,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Basic Attack Cards (4x)
   {
     id: 'strike',
-    name: 'Strike',
-    description: 'Deal 6 damage.',
+    name: '打击',
+    description: '造成 6 点伤害。',
     cost: 1,
     type: CardType.ATTACK,
     rarity: CardRarity.BASIC,
@@ -28,8 +28,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Basic Defense Cards (4x)
   {
     id: 'defend',
-    name: 'Defend',
-    description: 'Gain 5 block.',
+    name: '防御',
+    description: '获得 5 点护甲。',
     cost: 1,
     type: CardType.SKILL,
     rarity: CardRarity.BASIC,
@@ -47,8 +47,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Bash
   {
     id: 'bash',
-    name: 'Bash',
-    description: 'Deal 8 damage. Apply 2 Vulnerable.',
+    name: '重击',
+    description: '造成 8 点伤害。施加 2 层易伤。',
     cost: 2,
     type: CardType.ATTACK,
     rarity: CardRarity.BASIC,
@@ -73,8 +73,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Anger
   {
     id: 'anger',
-    name: 'Anger',
-    description: 'Deal 6 damage. Add a copy of this card to your discard pile.',
+    name: '愤怒',
+    description: '造成 6 点伤害。将此牌的一张复制品放入你的弃牌堆。',
     cost: 0,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,
@@ -92,8 +92,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Cleave
   {
     id: 'cleave',
-    name: 'Cleave',
-    description: 'Deal 8 damage to all enemies.',
+    name: '横扫',
+    description: '对所有敌人造成 8 点伤害。',
     cost: 1,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,
@@ -111,8 +111,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Iron Wave
   {
     id: 'iron_wave',
-    name: 'Iron Wave',
-    description: 'Gain 5 block. Deal 5 damage.',
+    name: '铁浪',
+    description: '获得 5 点护甲。造成 5 点伤害。',
     cost: 1,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,
@@ -135,8 +135,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Pommel Strike
   {
     id: 'pommel_strike',
-    name: 'Pommel Strike',
-    description: 'Deal 9 damage. Draw 1 card.',
+    name: '柄击',
+    description: '造成 9 点伤害。抽 1 张牌。',
     cost: 1,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,
@@ -158,8 +158,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Shrug It Off
   {
     id: 'shrug_it_off',
-    name: 'Shrug It Off',
-    description: 'Gain 8 block. Draw 1 card.',
+    name: '一笑了之',
+    description: '获得 8 点护甲。抽 1 张牌。',
     cost: 1,
     type: CardType.SKILL,
     rarity: CardRarity.COMMON,
@@ -181,8 +181,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Armaments
   {
     id: 'armaments',
-    name: 'Armaments',
-    description: 'Gain 5 block. Upgrade a card in your hand this combat.',
+    name: '武装',
+    description: '获得 5 点护甲。在本场战斗中将手牌中的一张牌升级。',
     cost: 1,
     type: CardType.SKILL,
     rarity: CardRarity.UNCOMMON,
@@ -200,8 +200,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Body Slam
   {
     id: 'body_slam',
-    name: 'Body Slam',
-    description: 'Deal damage equal to your block.',
+    name: '肉搏',
+    description: '造成等于你护甲值的伤害。',
     cost: 1,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,
@@ -219,8 +219,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Flex
   {
     id: 'flex',
-    name: 'Flex',
-    description: 'Gain 2 Strength. At the end of your turn, lose 2 Strength.',
+    name: '展示力量',
+    description: '获得 2 点力量。在你的回合结束时,失去 2 点力量。',
     cost: 0,
     type: CardType.SKILL,
     rarity: CardRarity.COMMON,
@@ -240,8 +240,8 @@ export const IRONCLAD_STARTER_DECK: Card[] = [
   // Heavy Blade
   {
     id: 'heavy_blade',
-    name: 'Heavy Blade',
-    description: 'Deal 14 damage. Strength affects this card 3 times.',
+    name: '重剑',
+    description: '造成 14 点伤害。力量对此牌的效果影响 3 次。',
     cost: 2,
     type: CardType.ATTACK,
     rarity: CardRarity.COMMON,

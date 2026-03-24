@@ -2,10 +2,10 @@
   <div class="shop-view min-h-screen bg-gradient-to-b from-amber-900 to-amber-950 p-4 flex flex-col">
     <!-- Header -->
     <div class="text-center mb-4">
-      <h1 class="text-2xl font-bold text-amber-100 mb-2">Merchant</h1>
+      <h1 class="text-2xl font-bold text-amber-100 mb-2">商人</h1>
       <div class="flex items-center justify-center gap-2 text-amber-200">
         <span class="text-xl">💰</span>
-        <span class="text-lg font-semibold">{{ gameStore.gold }} Gold</span>
+        <span class="text-lg font-semibold">{{ gameStore.gold }} 金币</span>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
                   'bg-slate-700 text-slate-100': item.card.rarity === 'common'
                 }"
               >
-                {{ item.card.rarity }}
+                {{ item.card.rarity === 'common' ? '普通' : item.card.rarity === 'uncommon' ? '罕见' : item.card.rarity === 'rare' ? '稀有' : item.card.rarity }}
               </div>
             </div>
             <p class="text-xs text-amber-300">{{ item.card.type }}</p>
@@ -68,7 +68,7 @@
               'bg-green-800 text-green-200 cursor-default': item.purchased
             }"
           >
-            {{ item.purchased ? 'SOLD' : canAfford(item) ? 'BUY' : 'NO GOLD' }}
+            {{ item.purchased ? '已售出' : canAfford(item) ? '购买' : '金币不足' }}
           </button>
         </div>
       </div>
@@ -81,13 +81,13 @@
         class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-100 rounded-lg
                font-semibold transition-colors active:scale-95 touch-manipulation"
       >
-        Leave Shop
+        离开商店
       </button>
     </div>
 
     <!-- Shop Keeper Message -->
     <div class="mt-2 text-center">
-      <p class="text-amber-300 text-sm italic">"Welcome, traveler. Take a look at my wares!"</p>
+      <p class="text-amber-300 text-sm italic">"欢迎,旅行者。看看我的商品吧!"</p>
     </div>
   </div>
 </template>
