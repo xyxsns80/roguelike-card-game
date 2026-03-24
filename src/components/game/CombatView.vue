@@ -133,7 +133,7 @@
 
       <!-- Hand Cards Area -->
       <div class="hand-cards-area h-56 overflow-x-auto overflow-y-hidden">
-        <div class="hand-cards flex justify-center gap-3 px-4 py-2 min-h-full items-center">
+        <div class="hand-cards flex gap-3 px-4 py-2 min-h-full items-center" style="min-width: max-content;">
           <div
             v-for="(card, index) in hand"
             :key="index"
