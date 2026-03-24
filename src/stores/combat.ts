@@ -14,6 +14,7 @@ import {
   processEndOfTurnBuffs,
   BuffType
 } from '@/utils/buffs'
+import { useGameStore } from './game'
 
 export const useCombatStore = defineStore('combat', () => {
   // State
@@ -263,6 +264,12 @@ export const useCombatStore = defineStore('combat', () => {
       } else {
         addLog('system', 'Defeat...')
       }
+
+      // Trigger game state transition
+      setTimeout(() => {
+        const gameStore = useGameStore()
+        gameStore.onCombatEnd(playerWon.value)
+      }, 1500)
     } else {
       // Schedule end of enemy turn
       setTimeout(() => endTurn(), 1000)
