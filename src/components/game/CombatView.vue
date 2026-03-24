@@ -132,22 +132,22 @@
       </div>
 
       <!-- Hand Cards Area -->
-      <div class="hand-cards-area h-56 overflow-x-auto overflow-y-hidden">
-        <div class="hand-cards flex gap-3 px-4 py-2 min-h-full items-center" style="min-width: max-content;">
+      <div class="hand-cards-area h-72 overflow-x-auto overflow-y-hidden">
+        <div class="hand-cards flex gap-4 px-4 py-3 min-h-full items-center" style="min-width: max-content;">
           <div
             v-for="(card, index) in hand"
             :key="index"
             @click="handleCardClick(card)"
             @touchstart.prevent="handleCardTouchStart(card, index)"
             @touchend.prevent="handleCardTouchEnd"
-            :class="['card card-item bg-slate-800 rounded-xl p-4 cursor-pointer border-2 transition-all flex-shrink-0 shadow-lg', {
+            :class="['card card-item bg-slate-800 rounded-xl p-5 cursor-pointer border-2 transition-all flex-shrink-0 shadow-lg', {
               'border-slate-700 opacity-50': energy < card.cost,
               'border-green-500 shadow-lg shadow-green-500/30': selectedCard?.id === card.id,
               'border-slate-600 hover:border-yellow-500 hover:scale-105': energy >= card.cost && selectedCard?.id !== card.id
             }]"
-            style="min-width: 120px; max-width: 140px;"
+            style="min-width: 160px; max-width: 180px;"
           >
-            <div class="card-cost absolute -top-3 -left-3 w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center font-bold text-sm shadow-md border-2 border-red-400">
+            <div class="card-cost absolute -top-4 -left-4 w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-xl font-bold text-slate-900 shadow-lg shadow-yellow-500/60 border-2 border-yellow-300 ring-2 ring-yellow-400/40 animate-pulse">
               {{ card.cost }}
             </div>
 
@@ -156,10 +156,10 @@
               ✓
             </div>
 
-            <div class="card-name text-center font-bold text-sm mb-2 mt-3">{{ card.name }}</div>
-            <div class="card-description text-xs text-slate-300 text-center leading-tight mb-2">{{ card.description }}</div>
+            <div class="card-name text-center font-bold text-base mb-2 mt-4">{{ card.name }}</div>
+            <div class="card-description text-sm text-slate-300 text-center leading-snug mb-2">{{ card.description }}</div>
 
-            <div class="card-type text-xs mt-2 text-center">
+            <div class="card-type text-sm mt-2 text-center">
               <span :class="{
                 'text-red-400': card.type === 'attack',
                 'text-blue-400': card.type === 'skill',

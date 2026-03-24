@@ -1,93 +1,78 @@
-# 任务：修复卡牌显示问题
+# 任务：优化手牌交互体验
 
 ## 问题描述
 
-1. **看不到全部卡牌** - 手牌显示不完整
-2. **出牌后无法了解牌的内容** - 需要卡牌详情功能
+1. **滑动区域太小** - 手牌区域高度不够，滑动操作困难
+2. **费用显示看不清** - 卡牌费用显示不明显
 
-## 需要修复的文件
+## 修复方案
 
-### 1. CombatView.vue - 手牌显示
+### 1. 增大滑动区域
 
-**问题**：手牌可能被遮挡或重叠
+**当前**：`h-56` (224px)
+**修改为**：`h-72` (288px) 或更大
 
-**修复方案**：
-- 确保手牌区域有足够的高度
-- 使用横向滚动或缩小卡牌尺寸
-- 每张卡牌都应该完整可见
+同时增大卡牌尺寸：
+- 当前：`min-width: 120px; max-width: 140px`
+- 修改为：`min-width: 150px; max-width: 180px`
 
-### 2. 添加卡牌详情功能
+### 2. 优化费用显示
 
-**功能**：
-- 点击卡牌时显示详情弹窗
-- 显示卡牌名称、描述、费用、类型
-- 显示卡牌效果说明
+**当前问题**：费用圆圈太小，颜色对比度不够
 
-**实现方式**：
-- 添加 `selectedCard` 状态
-- 添加 `showCardDetail` 弹窗组件
-- 点击卡牌时显示详情，再次点击关闭
+**修改方案**：
+- 增大费用圆圈：`w-12 h-12` (48px)
+- 使用更醒目的颜色：金色渐变 `from-yellow-400 to-amber-600`
+- 增大字体：`text-lg font-bold`
+- 添加发光效果：`shadow-lg shadow-yellow-500/50`
 
 ## 具体修改
 
-### CombatView.vue 修改
+### CombatView.vue
 
-1. **手牌区域**：
 ```vue
-<!-- 确保手牌区域高度足够 -->
-<div class="hand-area h-48 overflow-x-auto">
-  <div class="flex gap-2 p-2 min-w-max">
-    <div v-for="(card, index) in hand" 
-         :key="index"
-         class="card-wrapper flex-shrink-0 w-32">
-      <!-- 卡牌内容 -->
-    </div>
+<!-- 手牌区域：增大高度 -->
+<div class="hand-cards-area h-72 overflow-x-auto overflow-y-hidden">
+  <div class="hand-cards flex gap-4 px-4 py-3 min-h-full items-center" style="min-width: max-content;">
+    <div
+      class="card-item ..."
+      style="min-width: 160px; max-width: 180px;"
+    >
+      <!-- 费用显示：更大更醒目 -->
+      <div class="card-cost absolute -top-4 -left-4 w-12 h-12 rounded-full 
+                  bg-gradient-to-br from-yellow-400 to-amber-600 
+                  flex items-center justify-center 
+                  text-lg font-bold text-slate-900
+                  shadow-lg shadow-yellow-500/50 border-2 border-yellow-300">
+        {{ card.cost }}
+      </div>
+```
+
+### 卡牌内容也增大
+
+```vue
+<div class="card-content p-3">
+  <h4 class="text-base font-bold mb-2">{{ card.name }}</h4>
+  <p class="text-xs text-slate-300 mb-2">{{ card.description }}</p>
+  <div class="text-xs text-slate-400">
+    {{ cardTypeText[card.type] }}
   </div>
 </div>
 ```
-
-2. **卡牌详情弹窗**：
-```vue
-<!-- 卡牌详情弹窗 -->
-<div v-if="selectedCard" class="card-detail-modal" @click="selectedCard = null">
-  <div class="card-detail-content" @click.stop>
-    <h3>{{ selectedCard.name }}</h3>
-    <p class="cost">费用: {{ selectedCard.cost }}</p>
-    <p class="type">类型: {{ cardTypeText[selectedCard.type] }}</p>
-    <p class="description">{{ selectedCard.description }}</p>
-    <button @click="selectedCard = null">关闭</button>
-  </div>
-</div>
-```
-
-3. **卡牌点击事件**：
-```vue
-<div class="card" @click="showCardDetail(card)">
-  <!-- 卡牌内容 -->
-</div>
-```
-
-## 翻译对照
-
-| 中文 | 英文 (代码) |
-|------|-------------|
-| 攻击 | ATTACK |
-| 技能 | SKILL |
-| 能力 | POWER |
 
 ## 验收标准
 
-1. 所有手牌都能完整显示
-2. 点击卡牌能显示详情
-3. 详情弹窗显示：名称、费用、类型、描述
-4. 点击弹窗外部或关闭按钮能关闭弹窗
-5. 游戏功能不受影响
+1. 手牌区域高度至少 288px
+2. 每张卡牌宽度 160-180px
+3. 费用圆圈 48px，金色渐变
+4. 费用数字清晰可见
+5. 滑动操作顺畅
 
 ## 执行顺序
 
-1. 修复手牌显示区域
-2. 添加卡牌详情状态和弹窗
-3. 添加卡牌点击事件
-4. 测试并提交
+1. 增大手牌区域高度
+2. 增大卡牌尺寸
+3. 优化费用显示样式
+4. 重新构建并推送
 
-**开始修复！确保玩家能看到所有卡牌并了解每张牌的效果。**
+**开始优化！确保玩家能轻松滑动查看手牌，费用一目了然。**
