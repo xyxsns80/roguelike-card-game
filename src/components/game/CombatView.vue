@@ -120,7 +120,7 @@
     </div>
 
     <!-- Hand Section -->
-    <div class="hand-section bg-slate-950 p-4 border-t-2 border-slate-700 relative">
+    <div class="hand-section bg-slate-950 border-t-2 border-slate-700 relative">
       <!-- Cancel targeting button -->
       <div v-if="isTargetingMode" class="absolute top-2 right-2 z-20">
         <button
@@ -130,45 +130,50 @@
           ✕ 取消
         </button>
       </div>
-      <div class="hand-cards flex justify-center gap-3 overflow-x-auto pb-2 px-2">
-        <div
-          v-for="(card, index) in hand"
-          :key="index"
-          @click="playCard(card)"
-          @touchstart.prevent="handleCardTouchStart(card, index)"
-          @touchend.prevent="handleCardTouchEnd"
-          :class="['card card-item bg-slate-800 rounded-xl p-4 cursor-pointer border-2 transition-all min-w-[110px] max-w-[130px] shadow-lg', {
-            'border-slate-700 opacity-50': energy < card.cost,
-            'border-green-500 shadow-lg shadow-green-500/30': selectedCard?.id === card.id,
-            'border-slate-600 hover:border-yellow-500 hover:scale-105': energy >= card.cost && selectedCard?.id !== card.id
-          }]"
-        >
-          <div class="card-cost absolute -top-3 -left-3 w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center font-bold text-sm shadow-md border-2 border-red-400">
-            {{ card.cost }}
-          </div>
 
-          <!-- Selected indicator -->
-          <div v-if="selectedCard?.id === card.id" class="absolute -top-3 -right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs font-bold">
-            ✓
-          </div>
+      <!-- Hand Cards Area -->
+      <div class="hand-cards-area h-56 overflow-x-auto overflow-y-hidden">
+        <div class="hand-cards flex justify-center gap-3 px-4 py-2 min-h-full items-center">
+          <div
+            v-for="(card, index) in hand"
+            :key="index"
+            @click="handleCardClick(card)"
+            @touchstart.prevent="handleCardTouchStart(card, index)"
+            @touchend.prevent="handleCardTouchEnd"
+            :class="['card card-item bg-slate-800 rounded-xl p-4 cursor-pointer border-2 transition-all flex-shrink-0 shadow-lg', {
+              'border-slate-700 opacity-50': energy < card.cost,
+              'border-green-500 shadow-lg shadow-green-500/30': selectedCard?.id === card.id,
+              'border-slate-600 hover:border-yellow-500 hover:scale-105': energy >= card.cost && selectedCard?.id !== card.id
+            }]"
+            style="min-width: 120px; max-width: 140px;"
+          >
+            <div class="card-cost absolute -top-3 -left-3 w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center font-bold text-sm shadow-md border-2 border-red-400">
+              {{ card.cost }}
+            </div>
 
-          <div class="card-name text-center font-bold text-sm mb-2 mt-3">{{ card.name }}</div>
-          <div class="card-description text-xs text-slate-300 text-center leading-tight mb-2">{{ card.description }}</div>
+            <!-- Selected indicator -->
+            <div v-if="selectedCard?.id === card.id" class="absolute -top-3 -right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs font-bold">
+              ✓
+            </div>
 
-          <div class="card-type text-xs mt-2 text-center">
-            <span :class="{
-              'text-red-400': card.type === 'attack',
-              'text-blue-400': card.type === 'skill',
-              'text-purple-400': card.type === 'power'
-            }">
-              {{ card.type.toUpperCase() }}
-            </span>
+            <div class="card-name text-center font-bold text-sm mb-2 mt-3">{{ card.name }}</div>
+            <div class="card-description text-xs text-slate-300 text-center leading-tight mb-2">{{ card.description }}</div>
+
+            <div class="card-type text-xs mt-2 text-center">
+              <span :class="{
+                'text-red-400': card.type === 'attack',
+                'text-blue-400': card.type === 'skill',
+                'text-purple-400': card.type === 'power'
+              }">
+                {{ cardTypeText[card.type] }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Draw/Discard Piles Info -->
-      <div class="piles-info flex justify-center gap-6 mt-3 text-xs text-slate-400">
+      <div class="piles-info flex justify-center gap-6 pb-3 text-xs text-slate-400">
         <div class="flex items-center gap-2">
           <span class="text-lg">📚</span>
           <span>抽牌堆: {{ deck.drawPile.length }}</span>
@@ -176,6 +181,64 @@
         <div class="flex items-center gap-2">
           <span class="text-lg">🗑️</span>
           <span>弃牌堆: {{ deck.discardPile.length }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Detail Modal -->
+    <div v-if="showCardDetail" class="card-detail-modal fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" @click="closeCardDetail">
+      <div class="card-detail-content bg-slate-800 rounded-xl p-6 max-w-sm w-full border-2 border-slate-600 shadow-2xl" @click.stop>
+        <div class="detail-header flex justify-between items-start mb-4">
+          <h3 class="text-xl font-bold text-slate-100">{{ detailCard?.name }}</h3>
+          <button @click="closeCardDetail" class="text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+        </div>
+
+        <div class="detail-body space-y-3">
+          <!-- Cost -->
+          <div class="detail-cost flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center font-bold shadow-md border-2 border-red-400">
+              {{ detailCard?.cost }}
+            </div>
+            <span class="text-slate-300">费用</span>
+          </div>
+
+          <!-- Type -->
+          <div class="detail-type">
+            <span class="text-slate-400">类型:</span>
+            <span :class="{
+              'text-red-400 font-bold ml-2': detailCard?.type === 'attack',
+              'text-blue-400 font-bold ml-2': detailCard?.type === 'skill',
+              'text-purple-400 font-bold ml-2': detailCard?.type === 'power'
+            }">
+              {{ cardTypeText[detailCard?.type || 'attack'] }}
+            </span>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-description bg-slate-900 rounded-lg p-3">
+            <p class="text-slate-200 text-sm leading-relaxed">{{ detailCard?.description }}</p>
+          </div>
+
+          <!-- Target info -->
+          <div class="detail-target text-xs text-slate-400">
+            目标: {{ targetText[detailCard?.target || 'enemy'] }}
+          </div>
+        </div>
+
+        <div class="detail-actions mt-6 flex gap-3">
+          <button
+            @click="playDetailCard"
+            :disabled="!canPlayDetailCard"
+            class="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded-lg transition-colors"
+          >
+            出牌
+          </button>
+          <button
+            @click="closeCardDetail"
+            class="flex-1 bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+          >
+            关闭
+          </button>
         </div>
       </div>
     </div>
@@ -236,6 +299,22 @@ const touchedCard = ref<{ card: Card; index: number } | null>(null)
 const touchStartTime = ref(0)
 const selectedCard = ref<Card | null>(null)
 const isTargetingMode = ref(false)
+const showCardDetail = ref(false)
+const detailCard = ref<Card | null>(null)
+
+// Card type text translation
+const cardTypeText: Record<string, string> = {
+  'attack': '攻击',
+  'skill': '技能',
+  'power': '能力'
+}
+
+// Target text translation
+const targetText: Record<string, string> = {
+  'self': '自己',
+  'enemy': '敌方目标',
+  'all_enemies': '所有敌人'
+}
 
 // Damage popups
 interface DamagePopup {
@@ -252,6 +331,10 @@ const damagePopups = ref<DamagePopup[]>([])
 const aliveEnemies = computed(() => enemies.value.filter(e => e.currentHealth > 0))
 const hand = computed(() => deck.value.hand)
 const recentCombatLog = computed(() => combatLog.value.slice(-5))
+const canPlayDetailCard = computed(() => {
+  if (!detailCard.value || !isPlayerTurn.value) return false
+  return energy.value >= detailCard.value.cost
+})
 
 // Watch combat log for damage events and trigger popups
 watch(combatLog, (newLogs) => {
@@ -307,10 +390,35 @@ function handleCardTouchEnd() {
 
   // If it's a short tap (less than 300ms), treat as click
   if (touchDuration < 300 && touchedCard.value) {
-    playCard(touchedCard.value.card)
+    handleCardClick(touchedCard.value.card)
   }
 
   touchedCard.value = null
+}
+
+function handleCardClick(card: Card) {
+  if (!isPlayerTurn.value) return
+
+  // Show card detail instead of playing immediately
+  openCardDetail(card)
+}
+
+function openCardDetail(card: Card) {
+  detailCard.value = card
+  showCardDetail.value = true
+}
+
+function closeCardDetail() {
+  showCardDetail.value = false
+  detailCard.value = null
+}
+
+function playDetailCard() {
+  if (!detailCard.value || !canPlayDetailCard.value) return
+
+  const card = detailCard.value
+  closeCardDetail()
+  playCard(card)
 }
 
 function selectEnemy(index: number) {
@@ -405,16 +513,46 @@ onMounted(() => {
   z-index: 10;
 }
 
-/* Mobile-friendly scrolling */
-.hand-cards {
+/* Hand cards area */
+.hand-cards-area {
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   scroll-padding: 0 1rem;
 }
 
 .hand-cards > * {
-  scroll-snap-align: center;
-  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* Card detail modal */
+.card-detail-modal {
+  animation: fadeIn 0.2s ease;
+}
+
+.card-detail-content {
+  animation: slideUp 0.3s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Touch-friendly tap targets */

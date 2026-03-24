@@ -1,42 +1,93 @@
-# Roguelike Card Game Development
+# 任务：修复卡牌显示问题
 
-## Project Goal
-开发手机肉鸽卡牌游戏（类似杀戮尖塔）
+## 问题描述
 
-## Tech Stack
-- Vue 3 + TypeScript + Vite
-- Pinia for state management
-- Tailwind CSS for styling
+1. **看不到全部卡牌** - 手牌显示不完整
+2. **出牌后无法了解牌的内容** - 需要卡牌详情功能
 
-## Current Phase
-Phase 1: Foundation & Core Combat
+## 需要修复的文件
 
-### Tasks to Complete:
-1. Initialize Vue 3 + TypeScript + Vite project
-2. Create type definitions for game systems
-3. Implement Pinia stores
-4. Build card effect processor
-5. Create starter cards and enemies
-6. Build core combat UI
+### 1. CombatView.vue - 手牌显示
 
-## Design Decisions (Already Made):
-- UI: Tailwind CSS (快速开发)
-- PWA: 后期添加
-- MVP: 完整战斗系统
-- Mobile-first design (375px-428px screens)
-- Touch-friendly UI (48px min touch targets)
-- 60fps performance target
+**问题**：手牌可能被遮挡或重叠
 
-## Critical Files to Build:
-1. `src/types/card.ts` - Card system interfaces
-2. `src/stores/combat.ts` - Combat state machine
-3. `src/utils/cardEffectProcessor.ts` - Card effect resolution
-4. `src/components/game/CombatView.vue` - Main combat UI
-5. `src/data/cards/ironclad_cards.ts` - First character's cards
+**修复方案**：
+- 确保手牌区域有足够的高度
+- 使用横向滚动或缩小卡牌尺寸
+- 每张卡牌都应该完整可见
 
-## Instructions
-- Continue from where you left off
-- Implement features systematically
-- Test each component before moving on
-- Keep mobile-first design in mind
-- Focus on getting playable combat loop first
+### 2. 添加卡牌详情功能
+
+**功能**：
+- 点击卡牌时显示详情弹窗
+- 显示卡牌名称、描述、费用、类型
+- 显示卡牌效果说明
+
+**实现方式**：
+- 添加 `selectedCard` 状态
+- 添加 `showCardDetail` 弹窗组件
+- 点击卡牌时显示详情，再次点击关闭
+
+## 具体修改
+
+### CombatView.vue 修改
+
+1. **手牌区域**：
+```vue
+<!-- 确保手牌区域高度足够 -->
+<div class="hand-area h-48 overflow-x-auto">
+  <div class="flex gap-2 p-2 min-w-max">
+    <div v-for="(card, index) in hand" 
+         :key="index"
+         class="card-wrapper flex-shrink-0 w-32">
+      <!-- 卡牌内容 -->
+    </div>
+  </div>
+</div>
+```
+
+2. **卡牌详情弹窗**：
+```vue
+<!-- 卡牌详情弹窗 -->
+<div v-if="selectedCard" class="card-detail-modal" @click="selectedCard = null">
+  <div class="card-detail-content" @click.stop>
+    <h3>{{ selectedCard.name }}</h3>
+    <p class="cost">费用: {{ selectedCard.cost }}</p>
+    <p class="type">类型: {{ cardTypeText[selectedCard.type] }}</p>
+    <p class="description">{{ selectedCard.description }}</p>
+    <button @click="selectedCard = null">关闭</button>
+  </div>
+</div>
+```
+
+3. **卡牌点击事件**：
+```vue
+<div class="card" @click="showCardDetail(card)">
+  <!-- 卡牌内容 -->
+</div>
+```
+
+## 翻译对照
+
+| 中文 | 英文 (代码) |
+|------|-------------|
+| 攻击 | ATTACK |
+| 技能 | SKILL |
+| 能力 | POWER |
+
+## 验收标准
+
+1. 所有手牌都能完整显示
+2. 点击卡牌能显示详情
+3. 详情弹窗显示：名称、费用、类型、描述
+4. 点击弹窗外部或关闭按钮能关闭弹窗
+5. 游戏功能不受影响
+
+## 执行顺序
+
+1. 修复手牌显示区域
+2. 添加卡牌详情状态和弹窗
+3. 添加卡牌点击事件
+4. 测试并提交
+
+**开始修复！确保玩家能看到所有卡牌并了解每张牌的效果。**
