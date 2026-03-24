@@ -1,108 +1,42 @@
-# 任务：开发手机肉鸽卡牌游戏（类似杀戮尖塔）
+# Roguelike Card Game Development
 
-## 项目概述
+## Project Goal
+开发手机肉鸽卡牌游戏（类似杀戮尖塔）
 
-开发一款可以在手机浏览器上玩的 Roguelike 卡牌构筑游戏，核心玩法参考《杀戮尖塔》(Slay the Spire)。
+## Tech Stack
+- Vue 3 + TypeScript + Vite
+- Pinia for state management
+- Tailwind CSS for styling
 
-## 核心玩法
+## Current Phase
+Phase 1: Foundation & Core Combat
 
-### 卡牌系统
-- **攻击牌**：造成伤害（打击、重击、连击等）
-- **技能牌**：获得护甲、抽牌、特殊效果
-- **能力牌**：持续生效的增益/减益
-- **诅咒牌**：负面效果，增加策略深度
+### Tasks to Complete:
+1. Initialize Vue 3 + TypeScript + Vite project
+2. Create type definitions for game systems
+3. Implement Pinia stores
+4. Build card effect processor
+5. Create starter cards and enemies
+6. Build core combat UI
 
-### 战斗系统
-- **回合制**：玩家回合 → 敌人回合
-- **能量系统**：每回合 3 点能量，打出卡牌消耗能量
-- **护甲机制**：护甲可以抵挡伤害，下回合清空
-- **状态效果**：虚弱、力量、敏捷、中毒、燃烧等
+## Design Decisions (Already Made):
+- UI: Tailwind CSS (快速开发)
+- PWA: 后期添加
+- MVP: 完整战斗系统
+- Mobile-first design (375px-428px screens)
+- Touch-friendly UI (48px min touch targets)
+- 60fps performance target
 
-### Roguelike 元素
-- **随机地图**：分支路线，不同遭遇
-- **随机事件**：商店、宝箱、精英怪、随机事件
-- **永久死亡**：死亡后重新开始
-- **遗物系统**：收集遗物获得永久增益
+## Critical Files to Build:
+1. `src/types/card.ts` - Card system interfaces
+2. `src/stores/combat.ts` - Combat state machine
+3. `src/utils/cardEffectProcessor.ts` - Card effect resolution
+4. `src/components/game/CombatView.vue` - Main combat UI
+5. `src/data/cards/ironclad_cards.ts` - First character's cards
 
-### 进度系统
-- **3 层塔**：每层有不同主题和 Boss
-- **角色选择**：至少 2 个可选角色，各有特色卡组
-- **解锁系统**：通关解锁新卡牌和遗物
-
-## 技术要求
-
-### 前端
-- **框架**：Vue 3 + TypeScript + Vite
-- **状态管理**：Pinia
-- **UI 库**：简洁的自定义组件
-- **动画**：CSS 动画 + 简单过渡效果
-
-### 移动端适配
-- **响应式设计**：适配 375px - 428px 宽度
-- **触摸友好**：大按钮、滑动操作
-- **竖屏优先**：单手可玩
-- **离线支持**：PWA，可离线游玩
-
-### 数据存储
-- **本地存储**：localStorage 保存进度
-- **存档系统**：支持多个存档位
-
-## 开发阶段
-
-### 阶段 1：核心战斗（优先）
-- [ ] 卡牌数据结构
-- [ ] 手牌系统（抽牌、弃牌、消耗）
-- [ ] 能量系统
-- [ ] 基础战斗流程
-- [ ] 敌人 AI
-- [ ] 护甲和伤害计算
-
-### 阶段 2：卡牌和敌人
-- [ ] 至少 30 张卡牌
-- [ ] 至少 10 种敌人
-- [ ] 状态效果系统
-- [ ] 卡牌描述解析
-
-### 阶段 3：地图和事件
-- [ ] 地图生成算法
-- [ ] 节点类型（战斗、精英、商店、事件、Boss）
-- [ ] 随机事件系统
-- [ ] 商店系统
-
-### 阶段 4：遗物和角色
-- [ ] 至少 20 个遗物
-- [ ] 2 个可选角色
-- [ ] 角色初始卡组
-- [ ] 解锁系统
-
-### 阶段 5：UI 和打磨
-- [ ] 战斗动画
-- [ ] 音效提示（可选）
-- [ ] 教程引导
-- [ ] 平衡调整
-
-## 验收标准
-
-1. **可玩性**：完整的一局游戏流程（从开始到通关或死亡）
-2. **移动端**：在手机浏览器上流畅运行
-3. **策略性**：有足够的策略深度，不是无脑点击
-4. **重玩性**：随机性足够，每局体验不同
-5. **无严重 Bug**：核心功能稳定可用
-
-## 设计原则
-
-1. **简洁优先**：不过度设计，先实现核心循环
-2. **移动友好**：所有交互考虑触摸操作
-3. **性能优先**：保持 60fps，避免卡顿
-4. **渐进增强**：先有基础功能，再添加特效
-
-## 参考资源
-
-- 《杀戮尖塔》玩法机制
-- Vue 3 官方文档
-- Pinia 状态管理
-- PWA 开发指南
-
----
-
-**开始开发吧！先实现核心战斗系统，确保基础循环可玩。**
+## Instructions
+- Continue from where you left off
+- Implement features systematically
+- Test each component before moving on
+- Keep mobile-first design in mind
+- Focus on getting playable combat loop first
